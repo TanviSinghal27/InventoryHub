@@ -1,0 +1,27 @@
+<div class="orders-container">
+  <h2>Order Pipeline</h2>
+  <table class="orders-table">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Customer</th>
+        <th>Total</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (ord of orders(); track ord.id) {
+      <tr>
+        <td>#{{ ord.id }}</td>
+        <td>{{ ord.customer }}</td>
+        <td>${{ ord.total }}</td>
+        <td><span class="badge" [class.shipped]="ord.status === 'Shipped'">{{ ord.status }}</span></td>
+      </tr>
+      } @empty {
+      <tr>
+        <td colspan="4" class="empty">No orders processed yet.</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

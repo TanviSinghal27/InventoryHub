@@ -1,0 +1,31 @@
+<aside class="sidebar-wrapper">
+  <div class="sidebar-top">
+    <div class="brand-header">
+      <div class="brand-logo">A</div>
+      <span class="brand-name">Dashboard OS</span>
+    </div>
+
+
+    <nav class="nav-container">
+      <a routerLink="/dashboard" routerLinkActive="active-nav" class="nav-link">
+        <span>Dashboard</span>
+      </a>
+      <a routerLink="/product" routerLinkActive="active-nav" class="nav-link">
+        <span>Products</span>
+      </a>
+      <a routerLink="/category" routerLinkActive="active-nav" class="nav-link">
+        <span>Categories</span>
+      </a>
+      <a routerLink="/order" routerLinkActive="active-nav" class="nav-link">
+        <span>Orders</span>
+      </a>
+    </nav>
+  </div>
+
+
+  <div class="sidebar-footer">
+    <button (click)="auth.logout()" class="btn-logout">
+      Logout Session
+    </button>
+  </div>
+</aside>

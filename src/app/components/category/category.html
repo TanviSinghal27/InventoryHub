@@ -1,0 +1,19 @@
+<div class="crud-container">
+  <div class="action-bar">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Search categories...">
+    <button (click)="openModal()" class="btn-add">Add Category</button>
+  </div>
+  <ul class="data-list">
+    @for (cat of filteredCategories(); track cat.id) {
+    <li class="list-item">
+      <span>{{ cat.name }}</span>
+      <div class="item-actions">
+        <button (click)="openModal(cat)" class="edit">Edit</button>
+        <button (click)="deleteCategory(cat.id)" class="delete">Delete</button>
+      </div>
+    </li>
+    } @empty {
+    <p class="empty-msg">No categories present.</p>
+    }
+  </ul>
+</div>

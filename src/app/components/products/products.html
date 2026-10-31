@@ -1,0 +1,87 @@
+<div class="product-container">
+  <!-- Header Section -->
+  <div class="header-card">
+    <div>
+      <h2 class="header-title">Products Inventory</h2>
+      <p class="header-subtitle">Manage stock details, prices, and classifications.</p>
+    </div>
+    <button (click)="openModal()" class="btn-primary">
+      <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="icon-sm">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+      Add Product
+    </button>
+  </div>
+
+
+  <!-- Search Bar -->
+  <div class="search-card">
+    <div class="search-wrapper">
+      <span class="search-icon">
+        <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+          class="icon-md">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.604 10.604z" />
+        </svg>
+      </span>
+      <input [(ngModel)]="searchQuery" type="text" placeholder="Search products by title..." class="search-input" />
+    </div>
+  </div>
+
+
+  <!-- Table View -->
+  <div class="table-container">
+    <div class="responsive-table">
+      <table class="data-table">
+        <thead>
+          <tr class="table-head-row">
+            <th class="table-th text-left">Product details</th>
+            <th class="table-th text-right">Price</th>
+            <th class="table-th text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+          @for (prod of paginatedProducts(); track prod.id) {
+          <tr class="table-row">
+            <td class="table-td font-medium text-slate-900">{{ prod.name }}</td>
+            <td class="table-td text-right font-semibold text-slate-900">\${{ prod.price }}</td>
+            <td class="table-td">
+              <div class="action-buttons">
+                <button (click)="openModal(prod)" class="btn-action btn-edit">Edit</button>
+                <button (click)="deleteProduct(prod.id)" class="btn-action btn-delete">Delete</button>
+              </div>
+            </td>
+          </tr>
+          } @empty {
+          <tr>
+            <td colspan="3" class="table-empty">
+              <div class="empty-state">
+                <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                  class="empty-icon">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                </svg>
+                <span>No matches found. Create a new product instance to populate data.</span>
+              </div>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- Pagination -->
+    <div class="pagination-footer">
+      <div class="pagination-text">
+        Page <span>{{ currentPage() }}</span> of <span>{{ totalPages() }}</span>
+      </div>
+      <div class="pagination-buttons">
+        <button [disabled]="currentPage() === 1" (click)="currentPage.set(currentPage() - 1)"
+          class="btn-page">Previous</button>
+        <button [disabled]="currentPage() === totalPages()" (click)="currentPage.set(currentPage() + 1)"
+          class="btn-page">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
